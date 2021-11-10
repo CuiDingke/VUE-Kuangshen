@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!--view层 模板-->
+<div id="app">
+    {{message}}
+<!--    绑定提示信息-->
+    <span v-bind:title="message">鼠标悬停几秒钟查看此处动态绑定的提示信息！</span>
+<!--    v-on绑定一个事件-->
+    <button v-on:click="sayHi">click me</button>
+</div>
+
+<!--导入Vue.js-->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    var vm = new Vue({
+        //绑定对象app
+        el: "#app",
+        //Model:数据
+        data: {
+            message: "冰川"
+        },
+        methods: {
+        //    方法必须定义在Vue的methods对象中,事件必须进行监听event
+            sayHi: function (event) {
+                alert(this.message)
+            }
+        }
+
+    });
+</script>
+
+</body>
+</html>

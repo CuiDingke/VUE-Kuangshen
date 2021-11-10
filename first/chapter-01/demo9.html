@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--view层 模板-->
+<div id="app">
+    <todo>
+        <todo-title slot="title" v-bind:title="title"></todo-title>
+        <todo-items slot="items" v-for="(item,index) in todoItems" v-bind:item="item" :index="index" v-on:remove="removeItems(index)"></todo-items>
+    </todo>
+
+</div>
+
+<!--导入Vue.js-->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+<!--    组件就是进行界面布局用的-->
+<!--    slot : 插槽,提供样式-->
+    Vue.component("todo", {
+        template: '<div>' +
+                    '<slot name="title"></slot>' +
+                        '<ul>' +
+                            '<slot name="items"></slot>' +
+                        '</ul>' +
+                    '</div>'
+    });
+    //要显示的内容要先写好,然后在通过slot插入指定位置
+    Vue.component("todo-title",{
+        props: ['title'],
+        template:'<div>{{title}}</div>'
+        // template: '<div>标题</div>'
+    });
+    Vue.component("todo-items",{
+        props: ['item','index'],
+        //只能绑定当前组件的方法,怎样删除Vue实例里面的数据呢?????????用this.$
+        template:'<li>{{item}}----{{index}}<button @click="remove">删除</button></li>',
+        methods: {
+            remove: function (index){
+                //this.$emit 自定义事件分发
+                this.$emit('remove',index);
+                // alert("111")
+            }
+        }
+        // template: '<li>java</li>'
+    });
+    var vm = new Vue({
+        //绑定对象
+        el: "#app",
+        //Model:数据
+        data: {
+            title:"冰川",
+            todoItems: ['狂神说JAVA','狂神说LINUX','狂神说C']
+        },
+        methods: {
+            removeItems: function (index) {
+                console.log("删除了" + this.todoItems[index] + "ok");
+                this.todoItems.splice(index, 1);//删除自我下标的元素
+            }
+        }
+
+    });
+</script>
+</body>
+</html>

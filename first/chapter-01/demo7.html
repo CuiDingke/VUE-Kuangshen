@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+ <style>
+   [v-cloak]{
+     display: none;
+   }
+ </style>
+
+</head>
+<body>
+<!--view层 模板-->
+<!--v-cloak 解决闪烁问题，在加载之前让它白屏-->
+<div id="app" v-cloak>
+    <div>{{info.name}}</div>
+  <a v-bind:href="info.url">{{info.url}}</a>
+  {{message}}
+</div>
+
+
+<!--导入axios-->
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<!--导入Vue.js-->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+
+    var vm = new Vue({
+        //绑定对象
+        el: "#app",
+        // data:属性：vm
+
+        // data() 函数
+        data() {
+            return {
+                // 请求的返回参数，必须和json字符串一样
+                info: {
+                    name: null,
+                    address: {
+                        street: null,
+                        city: null,
+                        country: null
+                    },
+                  url:null
+                },
+              message: "hello vue"
+            }
+        },
+        mounted() {
+            //  el挂载后，钩子函数。
+            //  get获取数据，然后进行响应，响应的数据进行输出。。。链式函数axios
+            // axios.get('../data.json').then(response => (console.log(response.data)))
+          axios.get('../data.json').then(response => this.info = response.data)
+        }
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--view层 模板-->
+<div id="app">
+    <!--    先遍历data数据，v-bind传递组件的值bing给chuan-->
+    <Bingchuan v-for="bing in items" v-bind:chuan="bing"></Bingchuan>
+</div>
+
+<!--导入Vue.js-->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    <!--   定义一个Vue组件，也就是模板-->
+    Vue.component("Bingchuan", {
+        //props接收组件的值chuan
+        props: ['chuan'],
+        template: '<li>{{chuan}}</li>'
+    });
+
+    var vm = new Vue({
+        //绑定对象
+        el: "#app",
+        //Model:数据
+        data: {
+            items: ["java", "linux", "前端"]
+        }
+    });
+</script>
+</body>
+</html>

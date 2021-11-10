@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!--view层 模板-->
+<div id="app">
+    <!--    双向绑定-->
+    <!--    单个文本-->
+    输入的文本:<input type="text" v-model="message"> {{message}}
+    <!--    复选文本-->
+    <textarea cols="30" rows="10" v-model="message"></textarea>
+
+    <!--    单选-->
+    <input type="radio" name="sex" value="男" v-model="checked">男
+    <input type="radio" name="sex" value="女" v-model="checked">女
+    <p>
+        选中了{{checked}}
+    </p>
+    <!--    单选-->
+    <input type="checkbox" name="sex"  v-model="checked">男
+    <input type="checkbox" name="sex"  v-model="checked">女
+    <p>
+        选中了{{checked}}
+    </p>
+    <!--    下拉框-->
+    <select name="" id="" v-model="checked">
+        <option disabled value="">请选择</option>
+        <option>A</option>
+        <option>B</option>
+        <option>true</option>
+    </select>
+
+</div>
+
+<!--导入Vue.js-->
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.21/dist/vue.min.js"></script>
+<script>
+    var vm = new Vue({
+        //绑定对象
+        el: "#app",
+        //Model:数据
+        data: {
+            message: "hello vue",
+            checked: ""
+        }
+    })
+</script>
+</body>
+</html>
